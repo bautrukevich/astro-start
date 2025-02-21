@@ -1,6 +1,8 @@
 // @ts-check
 import { defineConfig, envField } from "astro/config";
 
+import node from "@astrojs/node";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -14,13 +16,20 @@ export default defineConfig({
       commonjsOptions: { transformMixedEsModules: true }, // Change
     },
   },
+
   prefetch: {
     defaultStrategy: "viewport",
   },
+
   env: {
     schema: {
       PUBLIC_SITE_URL: envField.string({ context: "client", access: "public" }),
     },
   },
+
   output: "server",
+
+  adapter: node({
+    mode: "standalone",
+  }),
 });
