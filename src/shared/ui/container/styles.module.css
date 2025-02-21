@@ -1,0 +1,15 @@
+.root {
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 1080px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (width >= 650px) {
+  .root {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}

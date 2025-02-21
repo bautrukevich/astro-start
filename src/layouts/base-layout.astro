@@ -1,0 +1,154 @@
+---
+import "modern-normalize/modern-normalize.css";
+import { ENV } from "@/shared/config";
+
+interface Props {
+  class?: string;
+  title: string;
+  description?: string;
+}
+
+const { class: className, title, description = "" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href={`/icon-${ENV.MODE}.svg`} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" /><!-- 180×180 -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body id="root" class={className}>
+    <slot />
+  </body>
+</html>
+<style is:global>
+  /* inter-latin-wght-normal */
+  @font-face {
+    font-family: "Inter Variable";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url("@fontsource-variable/inter/files/inter-latin-wght-normal.woff2") format("woff2-variations");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+      U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  /* inter-cyrillic-wght-normal */
+  @font-face {
+    font-family: "Inter Variable";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url("@fontsource-variable/inter/files/inter-cyrillic-wght-normal.woff2") format("woff2-variations");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+
+  :root {
+    /* Typography */
+    --font-sans: "Inter Variable", sans-serif;
+  }
+
+  /*
+  1. Use a more-intuitive box-sizing model.
+  */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /*
+    2. Remove default margin
+  */
+  * {
+    margin: 0;
+  }
+
+  /*
+    3. Allow percentage-based heights in the application
+  */
+  html,
+  body {
+    height: 100%;
+  }
+
+  /*
+    Typographic tweaks!
+    4. Add accessible line-height
+    5. Improve text rendering
+  */
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /*
+    6. Improve media defaults
+  */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /*
+    7. Remove built-in form typography styles
+  */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /*
+    8. Avoid text overflows
+  */
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  /*
+    9. Create a root stacking context
+  */
+  #root {
+    height: 100%;
+    isolation: isolate;
+    overflow-x: hidden;
+  }
+</style>
+
+<!-- Sentry -->
+<!-- <script is:inline>
+  Sentry.onLoad(function () {
+    Sentry.init({
+      // Performance Monitoring
+      tracesSampleRate: 1.0, // Capture 100% of the transactions
+      // Session Replay
+      replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
+      replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+    });
+  });
+</script> -->

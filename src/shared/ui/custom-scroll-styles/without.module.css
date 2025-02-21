@@ -1,0 +1,18 @@
+.root {
+  scrollbar-color: auto;
+  scrollbar-width: none;
+}
+
+.root::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.root::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+}
+
+.root::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
