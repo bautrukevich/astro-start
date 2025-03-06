@@ -4,7 +4,9 @@ networks:
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     networks:
       - web
     labels:
