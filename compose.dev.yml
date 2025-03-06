@@ -1,0 +1,25 @@
+networks:
+  web:
+    external: true
+
+services:
+  app:
+    build: .
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=web
+      - traefik.http.routers.app.entrypoints=https
+      - traefik.http.routers.app.rule=Host(`astro-start.test`)
+      - traefik.http.routers.app.tls=true
+      # Указываем порт Astro
+      - traefik.http.services.app.loadbalancer.server.port=4321
+      # Для работы WebSocket (HMR)
+      - traefik.http.routers.app.middlewares=app-headers
+      - traefik.http.middlewares.app-headers.headers.customrequestheaders.X-Forwarded-Proto=https
+    volumes:
+      - .:/app
+      - /app/node_modules # Избегаем перезаписи node_modules
+    environment:
+      - NODE_ENV=development

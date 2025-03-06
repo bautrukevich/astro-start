@@ -15,6 +15,9 @@ export default defineConfig({
       sourcemap: true,
       commonjsOptions: { transformMixedEsModules: true }, // Change
     },
+    server: {
+      allowedHosts: ["astro-start.test"],
+    },
   },
 
   prefetch: {
